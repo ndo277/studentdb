@@ -8,6 +8,8 @@ class App extends React.Component {
 
     this.state = {
       rawData: [],
+      filteredData: [],
+      filtered: false,
       searchQuery: ""
     };
 
@@ -28,14 +30,15 @@ class App extends React.Component {
 
   handleInput(e){
     this.setState({searchQuery: e.currentTarget.value});
-    let searchQuery = this.state.searchQuery.toLowerCase();
-    // let filteredData = this.state.rawData.filter(student => {
-    //   return(
-    //     student.firstName.toString().toLowerCase().indexOf(searchQuery) !== -1 ||
-    //     student.lasttName.toString().toLowerCase().indexOf(searchQuery) !== -1 
-    //   );
-    // });
-    // this.setState({rawData: filteredData});
+    let filteredData = this.state.rawData;
+    let searchQuery = e.currentTarget.value.toLowerCase();
+    filteredData = filteredData.filter(student => {
+      let fullName = student.firstName.toLowerCase() + student.lastName.toLowerCase();
+      return(
+        fullName.indexOf(searchQuery) !== -1
+      );
+    });
+    this.setState({filteredData: filteredData, filtered: true});
   }
 
   render() {
@@ -45,12 +48,17 @@ class App extends React.Component {
 
         <div className="student-index">
           <div className="name-filter">
-              <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleInput}/>
+              <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleInput} />
           </div>
 
-          {this.state.rawData.map(student => {
+          {!this.state.filtered && this.state.rawData.map(student => {
             return(
               <Student student={student} key={student.id}/>
+            )
+          })}
+          {this.state.filtered && this.state.filteredData.map(student => {
+            return (
+              <Student student={student} key={student.id} />
             )
           })}
         </div>
