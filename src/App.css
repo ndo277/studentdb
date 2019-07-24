@@ -59,6 +59,10 @@
   margin-left: 8px;
 }
 
+.search-field:focus {
+  border-bottom: 1px solid  black;
+}
+
 .search-field {
   height: 80%;
   width: 99%;
