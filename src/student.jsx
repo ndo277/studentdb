@@ -51,9 +51,12 @@ class Student extends React.Component {
       <div className="scores">
         {this.props.student.grades.map((grade, i) => {
           return (
-            <li className="grades">
-              Test {i + 1}: {grade}%
-                  </li>
+            <li className="grades" key={i}>
+              <div className="test-score">
+                <div>Test {i + 1}:</div>
+                 <div className="grade">{grade}%</div>
+              </div>
+            </li>
           )
         })}
       </div>
@@ -65,9 +68,13 @@ class Student extends React.Component {
       <li className="student" key={this.props.student.id}> 
           <img src={this.props.student.pic} alt="pic" className="pic" />
           <div className="student-info">
-            <h3 className="name">
-            {this.props.student.firstName.toUpperCase()} {this.props.student.lastName.toUpperCase()}
-            </h3>
+            <div className="top">
+              <h3 className="name">
+              {this.props.student.firstName.toUpperCase()} {this.props.student.lastName.toUpperCase()}
+              </h3>
+              {this.state.collapsed && expand}
+              {!this.state.collapsed && collapse}
+            </div>
             <div className="info">
               <div className="info-line">Email: {this.props.student.email}</div>
               <div className="info-line">Company: {this.props.student.company}</div>
@@ -78,9 +85,6 @@ class Student extends React.Component {
               
             </div>
           </div>
-
-          {this.state.collapsed && expand}
-          {!this.state.collapsed && collapse}
           
       </li>
     )
