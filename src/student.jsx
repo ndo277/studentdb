@@ -37,10 +37,10 @@ class Student extends React.Component {
             {this.props.student.firstName.toUpperCase()} {this.props.student.lastName.toUpperCase()}
             </h3>
             <div className="info">
-              <div>Email: {this.props.student.email}</div>
-              <div>Company: {this.props.student.company}</div>
-              <div>Skill: {this.props.student.skill}</div>
-              <div>Average: {this.state.average}</div>
+              <div className="info-line">Email: {this.props.student.email}</div>
+              <div className="info-line">Company: {this.props.student.company}</div>
+              <div className="info-line">Skill: {this.props.student.skill}</div>
+              <div className="info-line">Average: {this.state.average}</div>
             </div>
           </div>
         
