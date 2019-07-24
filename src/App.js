@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Student from './student';
 
 class App extends React.Component {
   constructor(props){
@@ -21,7 +22,6 @@ class App extends React.Component {
     fetch('https://www.hatchways.io/api/assessment/students')
       .then(res => res.json())
       .then(data => this.setState({ rawData: data }));
-      // .then(() => console.log(this.state.rawData.students));
   }
 
   render() {
@@ -35,9 +35,7 @@ class App extends React.Component {
         <div className="student-index">
           {this.state.rawData.students.map(student => {
             return(
-              <li className="student">
-                {student.firstName}
-              </li>
+              <Student student={student} key={student.id}/>
             )
           })}
         </div>
