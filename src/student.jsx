@@ -5,10 +5,12 @@ class Student extends React.Component {
     super(props);
 
     this.state = {
-      average: null
+      average: null,
+      collapsed: true
     };
 
     this.getAverage = this.getAverage.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
   }
 
@@ -27,9 +29,39 @@ class Student extends React.Component {
     return sum / grades.length;
   }
 
+  handleClick(){
+    this.setState({collapsed: !this.state.collapsed});
+  }
+
 
   render(){
+    let expand = (
+      <button onClick={this.handleClick} className="button">
+        +
+      </button>
+    )
+
+    let collapse = (
+      <button onClick={this.handleClick} className="button">
+        -
+      </button>
+    )
+
+    let scores = (
+      <div className="scores">
+        {this.props.student.grades.map((grade, i) => {
+          return (
+            <li className="grades">
+              Test {i + 1}: {grade}%
+                  </li>
+          )
+        })}
+      </div>
+    )
+
+
     return(
+
       <li className="student" key={this.props.student.id}> 
           <img src={this.props.student.pic} alt="pic" className="pic" />
           <div className="student-info">
@@ -41,9 +73,14 @@ class Student extends React.Component {
               <div className="info-line">Company: {this.props.student.company}</div>
               <div className="info-line">Skill: {this.props.student.skill}</div>
               <div className="info-line">Average: {this.state.average}</div>
+
+              {!this.state.collapsed && scores}
+              
             </div>
           </div>
-        
+
+          {this.state.collapsed && expand}
+          {!this.state.collapsed && collapse}
           
       </li>
     )
