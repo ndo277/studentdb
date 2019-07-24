@@ -1,11 +1,25 @@
 .App {
-  text-align: center;
+  background-color:  #fafafa80;
+  padding-top: 7%;
+  padding-bottom: 7%;
+}
+
+.student-index {
+  width: 60%;
+  height: 600px;
+  overflow: scroll; 
+  margin: 0 auto;
+  border: 1px solid  #fafafa80;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px lightgray;
 }
 
 .student {
   list-style: none;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid  lightgray;
 }
 
 .info {

@@ -30,7 +30,6 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h2>StudentDB</h2>
 
         <div className="student-index">
           {this.state.rawData.students.map(student => {
