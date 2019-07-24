@@ -30,17 +30,21 @@ class Student extends React.Component {
 
   render(){
     return(
-      <li className="student" key={this.props.student.id}>
-        <img src={this.props.student.pic} alt="pic" className="pic"/>
-        <h3 className="name">  
-          {this.props.student.firstName} {this.props.student.lastName}
-        </h3>
-        <div className="info">
-          <div>Email: {this.props.student.email}</div> 
-          <div>Company: {this.props.student.company}</div>
-          <div>Skill: {this.props.student.skill}</div>
-          <div>Average: {this.state.average}</div>
-        </div>
+      <li className="student" key={this.props.student.id}> 
+          <img src={this.props.student.pic} alt="pic" className="pic" />
+          <div className="student-info">
+            <h3 className="name">
+            {this.props.student.firstName.toUpperCase()} {this.props.student.lastName.toUpperCase()}
+            </h3>
+            <div className="info">
+              <div className="info-line">Email: {this.props.student.email}</div>
+              <div className="info-line">Company: {this.props.student.company}</div>
+              <div className="info-line">Skill: {this.props.student.skill}</div>
+              <div className="info-line">Average: {this.state.average}</div>
+            </div>
+          </div>
+        
+          
       </li>
     )
   }
