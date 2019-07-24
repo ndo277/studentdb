@@ -53,7 +53,10 @@ class Student extends React.Component {
     } else{
       sessionStorage.setItem(name, sessionStorage.getItem(name).concat(` ${tag}`));
     } 
-    document.getElementById("tag").value = "";
+    console.log(document.querySelectorAll(".tag-field"));
+    document.querySelectorAll(".tag-field").forEach(el => {
+      return el.value = "";
+    });
     this.fetchTags();
   }
 
@@ -66,6 +69,7 @@ class Student extends React.Component {
       tagString = sessionStorage.getItem(name).trim();
     }
     let tags = tagString.split(" ");
+    if (tags[0] === "") tags = [];
     this.setState({tags: tags});
   }
 
@@ -105,8 +109,8 @@ class Student extends React.Component {
           })}
         </div>
 
-        <form action="" onSubmit={this.handleSubmit}>
-          <input type="text" id="tag" onChange={this.handleInput} />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" onChange={this.handleInput} className="tag-field" placeholder="Add a tag"/>
         </form>
 
       </div>
