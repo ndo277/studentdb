@@ -23,26 +23,32 @@ class App extends React.Component {
   fetchRawData(){
     fetch('https://www.hatchways.io/api/assessment/students')
       .then(res => res.json())
-      .then(data => this.setState({ rawData: data }));
+      .then(data => this.setState({ rawData: data.students }));
   }
 
   handleInput(e){
     this.setState({searchQuery: e.currentTarget.value});
+    let searchQuery = this.state.searchQuery.toLowerCase();
+    // let filteredData = this.state.rawData.filter(student => {
+    //   return(
+    //     student.firstName.toString().toLowerCase().indexOf(searchQuery) !== -1 ||
+    //     student.lasttName.toString().toLowerCase().indexOf(searchQuery) !== -1 
+    //   );
+    // });
+    // this.setState({rawData: filteredData});
   }
 
   render() {
-
-    if (!this.state.rawData.students) return null;
 
     return (
       <div className="App">
 
         <div className="student-index">
           <div className="name-filter">
-              <input type="text" className="search-field" onChange={this.handleInput}/>
+              <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleInput}/>
           </div>
 
-          {this.state.rawData.students.map(student => {
+          {this.state.rawData.map(student => {
             return(
               <Student student={student} key={student.id}/>
             )
