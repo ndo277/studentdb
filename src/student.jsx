@@ -6,16 +6,22 @@ class Student extends React.Component {
 
     this.state = {
       average: null,
-      collapsed: true
+      collapsed: true,
+      tag: "",
+      tags: []
     };
 
     this.getAverage = this.getAverage.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchTags = this.fetchTags.bind(this);
 
   }
 
   componentDidMount(){
-    this.setState({ average: this.getAverage() + "%"}); 
+    this.setState({ average: this.getAverage() + "%"});
+    this.fetchTags();
   }
 
   getAverage(){
@@ -33,6 +39,35 @@ class Student extends React.Component {
     this.setState({collapsed: !this.state.collapsed});
   }
 
+  handleInput(e){
+    this.setState({tag: e.currentTarget.value});
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    let tag = this.state.tag;
+    let name = `tags${this.props.student.id}`;
+    if (!sessionStorage.getItem(name)) sessionStorage.setItem(name, "");
+    if (sessionStorage.getItem(name) === ""){
+      sessionStorage.setItem(name, sessionStorage.getItem(name).concat(`${tag}`));
+    } else{
+      sessionStorage.setItem(name, sessionStorage.getItem(name).concat(` ${tag}`));
+    } 
+    document.getElementById("tag").value = "";
+    this.fetchTags();
+  }
+
+  fetchTags(){
+    let name = `tags${this.props.student.id}`;
+    let tagString;
+    if (sessionStorage.getItem(name) === null){
+      tagString = "";
+    } else{
+      tagString = sessionStorage.getItem(name).trim();
+    }
+    let tags = tagString.split(" ");
+    this.setState({tags: tags});
+  }
 
   render(){
     let expand = (
@@ -59,6 +94,21 @@ class Student extends React.Component {
             </li>
           )
         })}
+
+        <div className="tags">
+          {this.state.tags.map(tag => {
+            return(
+              <div className="tag">
+                {tag}
+              </div>
+            )
+          })}
+        </div>
+
+        <form action="" onSubmit={this.handleSubmit}>
+          <input type="text" id="tag" onChange={this.handleInput} />
+        </form>
+
       </div>
     )
 
