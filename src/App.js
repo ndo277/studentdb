@@ -67,7 +67,7 @@ class App extends React.Component {
               <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleNameInput} />
           </div>
 
-          <div className="tag-filter">
+          <div className="name-filter">
             <input type="text" placeholder="Search by tags" className="search-field" onChange={this.handleTagInput} />
           </div>
 
