@@ -75,5 +75,32 @@
 .button {
   height: 40px;
   width: 40px;
+  font-size: 50px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  color: grey;
+  cursor: pointer;
 }
 
+.button:hover {
+  color: black;
+}
+
+.top {
+  display: flex;
+  width: 680px;
+  justify-content: space-between;
+}
+
+.scores {
+  margin: 10px;
+}
+
+.grade {
+  margin-left: 30px;
+}
+
+.test-score{
+  display: flex;
+}
