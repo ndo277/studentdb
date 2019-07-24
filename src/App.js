@@ -7,10 +7,14 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      rawData: []
+      rawData: [],
+      filteredData: [],
+      filtered: false,
+      searchQuery: ""
     };
 
     this.fetchRawData = this.fetchRawData.bind(this);
+    this.handleInput = this.handleInput.bind(this);
 
   }
 
@@ -21,20 +25,40 @@ class App extends React.Component {
   fetchRawData(){
     fetch('https://www.hatchways.io/api/assessment/students')
       .then(res => res.json())
-      .then(data => this.setState({ rawData: data }));
+      .then(data => this.setState({ rawData: data.students }));
+  }
+
+  handleInput(e){
+    this.setState({searchQuery: e.currentTarget.value});
+    let filteredData = this.state.rawData;
+    let searchQuery = e.currentTarget.value.toLowerCase();
+    filteredData = filteredData.filter(student => {
+      let fullName = student.firstName.toLowerCase() + student.lastName.toLowerCase();
+      return(
+        fullName.indexOf(searchQuery) !== -1
+      );
+    });
+    this.setState({filteredData: filteredData, filtered: true});
   }
 
   render() {
-
-    if (!this.state.rawData.students) return null;
 
     return (
       <div className="App">
 
         <div className="student-index">
-          {this.state.rawData.students.map(student => {
+          <div className="name-filter">
+              <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleInput} />
+          </div>
+
+          {!this.state.filtered && this.state.rawData.map(student => {
             return(
               <Student student={student} key={student.id}/>
+            )
+          })}
+          {this.state.filtered && this.state.filteredData.map(student => {
+            return (
+              <Student student={student} key={student.id} />
             )
           })}
         </div>
