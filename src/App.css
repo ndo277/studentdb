@@ -80,6 +80,11 @@
   border: none;
   outline: none;
   color: grey;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: black;
 }
 
 .top {
