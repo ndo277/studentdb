@@ -54,6 +54,7 @@ class Student extends React.Component {
       sessionStorage.setItem(name, sessionStorage.getItem(name).concat(` ${tag}`));
     } 
     document.getElementById("tag").value = "";
+    this.fetchTags();
   }
 
   fetchTags(){
@@ -62,7 +63,7 @@ class Student extends React.Component {
     if (sessionStorage.getItem(name) === null){
       tagString = "";
     } else{
-      tagString = sessionStorage.getItem(name);
+      tagString = sessionStorage.getItem(name).trim();
     }
     let tags = tagString.split(" ");
     this.setState({tags: tags});
