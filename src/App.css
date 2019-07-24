@@ -116,3 +116,18 @@
   padding: 5px;
   border-radius: 5px;
 }
+
+.tag-field{
+  height: 20px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid  lightgray;
+  margin: 5px;
+  margin-top: 15px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.tag-field:focus {
+  border-bottom: 1px solid  black;
+}
