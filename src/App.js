@@ -9,13 +9,18 @@ class App extends React.Component {
     this.state = {
       rawData: [],
       filteredData: [],
+      nameFilteredData: [],
+      tagFilteredData: [],
       filtered: false,
-      searchQuery: ""
+      nameQuery: "",
+      tagQuery: ""
     };
-
+    this.nameFilteredData = [];
+    this.tagFilteredData = [];
     this.fetchRawData = this.fetchRawData.bind(this);
-    this.handleNameInput = this.handleNameInput.bind(this);
-    this.handleTagInput = this.handleTagInput.bind(this);
+    // this.handleNameInput = this.handleNameInput.bind(this);
+    // this.handleTagInput = this.handleTagInput.bind(this);
+    this.handleInput = this.handleInput.bind(this);
 
   }
 
@@ -29,33 +34,40 @@ class App extends React.Component {
       .then(data => this.setState({ rawData: data.students }));
   }
 
-  handleNameInput(e){
-    this.setState({searchQuery: e.currentTarget.value});
-    let filteredData = this.state.rawData;
-    let searchQuery = e.currentTarget.value.toLowerCase();
-    filteredData = filteredData.filter(student => {
-      let fullName = student.firstName.toLowerCase() + student.lastName.toLowerCase();
-      return(
-        fullName.indexOf(searchQuery) !== -1
-      );
-    });
-    this.setState({filteredData: filteredData, filtered: true});
+  handleInput(e){
+    if (e.currentTarget.classList[0] === "name-search-field"){
+      this.setState({ nameQuery: e.currentTarget.value });
+      let nameFilteredData = this.state.rawData;
+      let nameQuery = e.currentTarget.value.toLowerCase();
+      nameFilteredData = nameFilteredData.filter(student => {
+        let fullName = student.firstName.toLowerCase() + student.lastName.toLowerCase();
+        return (
+          fullName.indexOf(nameQuery) !== -1
+        );
+      });
+      this.nameFilteredData = nameFilteredData;
+    }
+
+    if (e.currentTarget.classList[0] === "tag-search-field"){
+      this.setState({ tagQuery: e.currentTarget.value });
+      let tagFilteredData = this.state.rawData;
+      let tagQuery = e.currentTarget.value.toLowerCase();
+      tagFilteredData = tagFilteredData.filter(student => {
+        let name = `tags${student.id}`;
+        let tags = sessionStorage.getItem(name);
+        if (tags === null) tags = "";
+        return (
+          tags.indexOf(tagQuery) !== -1
+        );
+      });
+      this.tagFilteredData = tagFilteredData;
+    }
+
+    let finalFilteredData = this.nameFilteredData.filter(value => this.tagFilteredData.includes(value));
+    
+    this.setState({ filteredData: finalFilteredData, filtered: true });
   }
 
-  handleTagInput(e){
-    this.setState({searchQuery: e.currentTarget.value});
-    let filteredData = this.state.rawData;
-    let tagQuery = e.currentTarget.value.toLowerCase();
-    filteredData = filteredData.filter(student => {
-      let name = `tags${student.id}`;
-      let tags = sessionStorage.getItem(name);
-      if (tags === null) tags = "";
-      return(
-        tags.indexOf(tagQuery) !== -1
-      );
-    });
-    this.setState({filteredData: filteredData, filtered: true});
-  }
 
   render() {
 
@@ -64,11 +76,11 @@ class App extends React.Component {
 
         <div className="student-index">
           <div className="name-filter">
-              <input type="text" placeholder="Search by name" className="search-field" onChange={this.handleNameInput} />
+              <input type="text" placeholder="Search by name" className="name-search-field" onChange={this.handleInput} />
           </div>
 
           <div className="name-filter">
-            <input type="text" placeholder="Search by tags" className="search-field" onChange={this.handleTagInput} />
+            <input type="text" placeholder="Search by tags" className="tag-search-field" onChange={this.handleInput} />
           </div>
 
           {!this.state.filtered && this.state.rawData.map(student => {
