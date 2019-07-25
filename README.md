@@ -1,10 +1,10 @@
-##How to run the application
+## How to run the application
 
 1) npm install
 
 2) npm start
 
-##About
+## About
 
 This application fetches student data from https://www.hatchways.io/api/assessment/students
 and displays each student's picture, name, email, company, skill, and average grade.
