@@ -17,6 +17,7 @@ class App extends React.Component {
     };
     this.nameFilteredData = [];
     this.tagFilteredData = [];
+    this.finalFilteredData = [];
     this.fetchRawData = this.fetchRawData.bind(this);
     // this.handleNameInput = this.handleNameInput.bind(this);
     // this.handleTagInput = this.handleTagInput.bind(this);
@@ -63,9 +64,15 @@ class App extends React.Component {
       this.tagFilteredData = tagFilteredData;
     }
 
-    let finalFilteredData = this.nameFilteredData.filter(value => this.tagFilteredData.includes(value));
+    if (document.getElementById("name-search").value === ""){
+      this.finalFilteredData = this.tagFilteredData;
+    } else if (document.getElementById("tag-search").value === "") {
+      this.finalFilteredData = this.tagFilteredData;
+    } else {
+      this.finalFilteredData = this.nameFilteredData.filter(value => this.tagFilteredData.includes(value));
+    }
     
-    this.setState({ filteredData: finalFilteredData, filtered: true });
+    this.setState({ filteredData: this.finalFilteredData, filtered: true });
   }
 
 
@@ -76,11 +83,11 @@ class App extends React.Component {
 
         <div className="student-index">
           <div className="name-filter">
-              <input type="text" placeholder="Search by name" className="name-search-field" onChange={this.handleInput} />
+              <input type="text" placeholder="Search by name" className="name-search-field" id="name-search" onChange={this.handleInput} />
           </div>
 
           <div className="name-filter">
-            <input type="text" placeholder="Search by tags" className="tag-search-field" onChange={this.handleInput} />
+            <input type="text" placeholder="Search by tags" className="tag-search-field" id="tag-search" onChange={this.handleInput} />
           </div>
 
           {!this.state.filtered && this.state.rawData.map(student => {
