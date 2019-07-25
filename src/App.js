@@ -67,7 +67,7 @@ class App extends React.Component {
     if (document.getElementById("name-search").value === ""){
       this.finalFilteredData = this.tagFilteredData;
     } else if (document.getElementById("tag-search").value === "") {
-      this.finalFilteredData = this.tagFilteredData;
+      this.finalFilteredData = this.nameFilteredData;
     } else {
       this.finalFilteredData = this.nameFilteredData.filter(value => this.tagFilteredData.includes(value));
     }
