@@ -19,8 +19,6 @@ class App extends React.Component {
     this.tagFilteredData = [];
     this.finalFilteredData = [];
     this.fetchRawData = this.fetchRawData.bind(this);
-    // this.handleNameInput = this.handleNameInput.bind(this);
-    // this.handleTagInput = this.handleTagInput.bind(this);
     this.handleInput = this.handleInput.bind(this);
 
   }
@@ -82,7 +80,7 @@ class App extends React.Component {
       <div>
         <h1 className="title">STUDENTDB</h1>
 
-        <div className="git"><a href="https://github.com/ndo277/studentdb/" className="link" target="_blank"> Github</a></div>
+        <div className="git"><a href="https://github.com/ndo277/studentdb/" className="link" target="_blank" rel="noopener noreferrer">[Github]</a></div>
         
         <div className="App">
 
