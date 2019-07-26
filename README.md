@@ -1,8 +1,6 @@
-## How to run the application
+## Live Demo
 
-1) npm install
-
-2) npm start
+https://ndo277.github.io/studentdb/
 
 ## About
 
