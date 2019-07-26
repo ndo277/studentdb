@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   fetchRawData(){
-    fetch('https://www.hatchways.io/api/assessment/students')
+    fetch('https://my-json-server.typicode.com/ndo277/studentdb/db')
       .then(res => res.json())
       .then(data => this.setState({ rawData: data.students }));
   }
@@ -79,29 +79,37 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="App">
+      <div>
+        <h1 className="title">STUDENTDB</h1>
 
-        <div className="student-index">
-          <div className="name-filter">
+        <div className="git"><a href="https://github.com/ndo277/studentdb/" className="link" target="_blank"> Github</a></div>
+        
+        <div className="App">
+
+          <div className="student-index">
+            <div className="name-filter">
               <input type="text" placeholder="Search by name" className="name-search-field" id="name-search" onChange={this.handleInput} />
-          </div>
+            </div>
 
-          <div className="name-filter">
-            <input type="text" placeholder="Search by tags" className="tag-search-field" id="tag-search" onChange={this.handleInput} />
-          </div>
+            <div className="name-filter">
+              <input type="text" placeholder="Search by tags" className="tag-search-field" id="tag-search" onChange={this.handleInput} />
+            </div>
 
-          {!this.state.filtered && this.state.rawData.map(student => {
-            return(
-              <Student student={student} key={student.id}/>
-            )
-          })}
-          {this.state.filtered && this.state.filteredData.map(student => {
-            return (
-              <Student student={student} key={student.id} />
-            )
-          })}
+            {!this.state.filtered && this.state.rawData.map(student => {
+              return (
+                <Student student={student} key={student.id} />
+              )
+            })}
+            {this.state.filtered && this.state.filteredData.map(student => {
+              return (
+                <Student student={student} key={student.id} />
+              )
+            })}
+          </div>
         </div>
+
       </div>
+      
     );
   }
 }
