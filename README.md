@@ -6,7 +6,7 @@
 
 ## About
 
-This application fetches student data from <>
+This application fetches student data from https://my-json-server.typicode.com/ndo277/studentdb/db
 and displays each student's picture, name, email, company, skill, and average grade.
 Click the "+" button to the right of each student's information to expand the view
 and display their individual test scores, and click the "-" button to hide them.
