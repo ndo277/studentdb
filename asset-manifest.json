@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/studentdb/static/css/main.87ecb913.chunk.css",
+    "main.js": "/studentdb/static/js/main.1ba41557.chunk.js",
+    "main.js.map": "/studentdb/static/js/main.1ba41557.chunk.js.map",
+    "runtime~main.js": "/studentdb/static/js/runtime~main.a7a9beb1.js",
+    "runtime~main.js.map": "/studentdb/static/js/runtime~main.a7a9beb1.js.map",
+    "static/js/2.0f58faaa.chunk.js": "/studentdb/static/js/2.0f58faaa.chunk.js",
+    "static/js/2.0f58faaa.chunk.js.map": "/studentdb/static/js/2.0f58faaa.chunk.js.map",
+    "index.html": "/studentdb/index.html",
+    "precache-manifest.bae76fa3223a589a32600ca2ba802b0c.js": "/studentdb/precache-manifest.bae76fa3223a589a32600ca2ba802b0c.js",
+    "service-worker.js": "/studentdb/service-worker.js",
+    "static/css/main.87ecb913.chunk.css.map": "/studentdb/static/css/main.87ecb913.chunk.css.map"
+  }
+}
